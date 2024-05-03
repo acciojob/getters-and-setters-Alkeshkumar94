@@ -1,43 +1,47 @@
-class Person {
-  constructor(name, age) {
-    this._name = name;
-    this._age = age;
-  }
-
-  get Name() {
-    return this._name;
-  }
-
-  set Age(age) {
-    this._age = age;
-  }
-
-  get Age() {
-    return this._age;
-  }
+function Person(name, age) {
+  this._name = name;
+  this._age = age;
 }
 
-class Student extends Person {
-  study() {
-    console.log(`${this.Name} is studying`);
-  }
+Person.prototype.getName = function() {
+  return this._name;
 }
 
-class Teacher extends Person {
-  teach() {
-    console.log(`${this.Name} is teaching`);
-  }
+Person.prototype.setAge = function(age) {
+  this._age = age;
+}
+
+Person.prototype.getAge = function() {
+  return this._age;
+}
+
+function Student(name, age) {
+  Person.call(this, name, age);
+}
+
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.study = function() {
+  console.log(this.getName() + ' is studying');
+}
+
+function Teacher(name, age) {
+  Person.call(this, name, age);
+}
+
+Teacher.prototype = Object.create(Person.prototype);
+Teacher.prototype.teach = function() {
+  console.log(this.getName() + ' is teaching');
 }
 
 // Example usage:
-const person = new Person("John", 25);
-console.log(person.Name); // Output: John
+var person = new Person("John", 25);
+console.log(person.getName());
 
-person.Age = 30;
-console.log(person.Age); // Output: 30
+person.setAge(30);
+console.log(person.getAge());
 
-const student = new Student("Alice", 22);
-student.study(); // Output: Alice is studying
+var student = new Student("Alice", 22);
+student.study();
 
-const teacher = new Teacher("Bob", 40);
-teacher.teach(); // Output: Bob is teaching
+var teacher = new Teacher("Bob", 40);
+teacher.teach();
