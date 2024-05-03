@@ -34,7 +34,7 @@ const person = new Person("John", 25);
 console.log(person.Name); // Output: John
 
 person.Age = 30;
-console.log(person.age); // Output: 30
+console.log(person.Age); // Output: 30
 
 const student = new Student("Alice", 22);
 student.study(); // Output: Alice is studying
